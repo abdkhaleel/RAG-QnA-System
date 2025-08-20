@@ -15,11 +15,13 @@ This script processes source documents and populates the vector database. It is 
 ```mermaid
 flowchart TD
     subgraph "Data Ingestion & Embedding Process"
-        A[Start: Run python ingest.py] --> B[Load & Chunk PDF Documents<br/>from '/documents' folder]
-        B --> C[Generate Vector Embeddings<br/>using all-MiniLM-L6-v2 model]
-        C --> D[Store Text Chunks & Embeddings<br/>in persistent ChromaDB instance]
-        D --> E[End: Database is ready]
+        A[Start Ingestion] --> B[Load & Chunk PDFs]
+        B --> C[Generate Embeddings<br/> (all-MiniLM-L6-v2)]
+        C --> D[Store in ChromaDB]
+        D --> E[End: DB Ready]
     end
+    SPACE1[ ]:::invisible
+    classDef invisible fill=none,stroke=none;
 ```
 
 ### 2. API Query Pipeline (`main.py`)
@@ -29,14 +31,15 @@ This is the live API service that answers user questions by leveraging the pre-p
 ```mermaid
 flowchart TD
     subgraph "Real-time RAG Query Service"
-        A[User sends POST request<br/>to /query with a question] 
-            --> B[Generate Embedding for<br/>the incoming Question]
-        B --> C[Query ChromaDB using question embedding<br/>to get Top-K relevant chunks]
-        C --> D[Construct Prompt with Question + Retrieved Context]
-        D --> E[Send Prompt to Google Gemini API]
-        E --> F[Receive Generated Answer<br/>from Gemini]
-        F --> G[Return JSON response<br/>with Final Answer]
+        A[POST /query Request] --> B[Embed Question]
+        B --> C[Retrieve Top-K Chunks<br/>from ChromaDB]
+        C --> D[Build Prompt<br/>(Q + Context)]
+        D --> E[Send to Gemini API]
+        E --> F[Get Generated Answer]
+        F --> G[Return JSON Response]
     end
+    SPACE2[ ]:::invisible
+    classDef invisible fill=none,stroke=none;
 ```
 
 ## Core Features

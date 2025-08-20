@@ -20,8 +20,6 @@ flowchart TD
         C --> D[Store Text Chunks & Embeddings<br/>in persistent ChromaDB instance]
         D --> E[End: Database is ready]
     end
-    SPACE1[ ]:::invisible
-    classDef invisible fill=none,stroke=none;
 ```
 
 ### 2. API Query Pipeline (`main.py`)
@@ -39,8 +37,6 @@ flowchart TD
         E --> F[Receive Generated Answer<br/>from Gemini]
         F --> G[Return JSON response<br/>with Final Answer]
     end
-    SPACE2[ ]:::invisible
-    classDef invisible fill=none,stroke=none;
 ```
 
 ## Core Features

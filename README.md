@@ -28,7 +28,7 @@ This is the live API service that answers user questions by leveraging the pre-p
 
 ```mermaid
 flowchart TD
-    subgraph "Real-time RAG Query Service"<br>
+    subgraph "Real-time RAG Query Service" NEWLINE
         A(User sends POST request<br>to /query with a question) --> B["Generate Embedding for the<br>incoming Question"];
         B --> C["Query ChromaDB using the question embedding<br>to find the Top-K most relevant text chunks"];
         C --> D["Construct a detailed Prompt<br>containing the original Question and the retrieved Context"];

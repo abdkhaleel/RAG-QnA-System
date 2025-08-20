@@ -15,10 +15,10 @@ This script processes source documents and populates the vector database. It is 
 ```mermaid
 flowchart TD
     subgraph "Data Ingestion & Embedding Process"
-        A(Start: Run python ingest.py) --> B["Load & Chunk PDF<br>Documents from '/documents' folder"];
-        B --> C["Generate Vector Embeddings<br>using 'all-MiniLM-L6-v2' model"];
-        C --> D["Store Text Chunks & Embeddings<br>in a persistent ChromaDB instance"];
-        D --> E(End: Database is ready);
+        A[Start: Run python ingest.py] --> B[Load & Chunk PDF Documents<br/>from '/documents' folder]
+        B --> C[Generate Vector Embeddings<br/>using all-MiniLM-L6-v2 model]
+        C --> D[Store Text Chunks & Embeddings<br/>in persistent ChromaDB instance]
+        D --> E[End: Database is ready]
     end
 ```
 
@@ -28,13 +28,14 @@ This is the live API service that answers user questions by leveraging the pre-p
 
 ```mermaid
 flowchart TD
-    subgraph "Real-time RAG Query Service";
-        A(User sends POST request<br>to /query with a question) --> B["Generate Embedding for the<br>incoming Question"];
-        B --> C["Query ChromaDB using the question embedding<br>to find the Top-K most relevant text chunks"];
-        C --> D["Construct a detailed Prompt<br>containing the original Question and the retrieved Context"];
-        D --> E["Send Prompt to<br>Google Gemini API"];
-        E --> F["Receive Generated Answer<br>from Gemini"];
-        F --> G(Return the final answer<br>in a JSON response to the user);
+    subgraph "Real-time RAG Query Service"
+        A[User sends POST request<br/>to /query with a question] 
+            --> B[Generate Embedding for<br/>the incoming Question]
+        B --> C[Query ChromaDB using question embedding<br/>to get Top-K relevant chunks]
+        C --> D[Construct Prompt with Question + Retrieved Context]
+        D --> E[Send Prompt to Google Gemini API]
+        E --> F[Receive Generated Answer<br/>from Gemini]
+        F --> G[Return JSON response<br/>with Final Answer]
     end
 ```
 

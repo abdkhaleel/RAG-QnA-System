@@ -16,7 +16,7 @@ This script processes source documents and populates the vector database. It is 
 flowchart TD
     subgraph "Data Ingestion & Embedding Process"
         A[Start Ingestion] --> B[Load & Chunk PDFs]
-        B --> C[Generate Embeddings<br/> (all-MiniLM-L6-v2)]
+        B --> C[Generate Embeddings\n(all-MiniLM-L6-v2)]
         C --> D[Store in ChromaDB]
         D --> E[End: DB Ready]
     end
@@ -32,8 +32,8 @@ This is the live API service that answers user questions by leveraging the pre-p
 flowchart TD
     subgraph "Real-time RAG Query Service"
         A[POST /query Request] --> B[Embed Question]
-        B --> C[Retrieve Top-K Chunks<br/>from ChromaDB]
-        C --> D[Build Prompt<br/>(Q + Context)]
+        B --> C[Retrieve Top-K Chunks\nfrom ChromaDB]
+        C --> D[Build Prompt\n(Q + Context)]
         D --> E[Send to Gemini API]
         E --> F[Get Generated Answer]
         F --> G[Return JSON Response]

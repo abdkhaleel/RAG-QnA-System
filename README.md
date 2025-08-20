@@ -14,7 +14,6 @@ This script processes source documents and populates the vector database. It is 
 
 ```mermaid
 flowchart TD
-    subgraph "Data Ingestion & Embedding Process"
         A[Start: Run python ingest.py] --> B[Load & Chunk PDF Documents<br/>from '/documents' folder]
         B --> C[Generate Vector Embeddings<br/>using all-MiniLM-L6-v2 model]
         C --> D[Store Text Chunks & Embeddings<br/>in persistent ChromaDB instance]
@@ -28,7 +27,6 @@ This is the live API service that answers user questions by leveraging the pre-p
 
 ```mermaid
 flowchart TD
-    subgraph "Real-time RAG Query Service"
         A[User sends POST request<br/>to /query with a question] 
             --> B[Generate Embedding for<br/>the incoming Question]
         B --> C[Query ChromaDB using question embedding<br/>to get Top-K relevant chunks]
